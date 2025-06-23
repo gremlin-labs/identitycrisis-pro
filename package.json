@@ -1,0 +1,95 @@
+{
+  "name": "identitycrisis-pro",
+  "version": "1.0.0",
+  "description": "IdentityCrisis Pro - A modern identity generator application",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "NODE_OPTIONS=--experimental-vm-modules vite build && electron .",
+    "dev:electron": "NODE_OPTIONS=--experimental-vm-modules concurrently \"vite\" \"wait-on http://localhost:3000 && electron .\"",
+    "dev:build": "NODE_OPTIONS=--experimental-vm-modules vite build && electron .",
+    "build": "NODE_OPTIONS=--experimental-vm-modules vite build",
+    "start": "NODE_OPTIONS=--experimental-vm-modules vite build && electron .",
+    "dist": "electron-builder",
+    "dist:all": "electron-builder --mac --win --linux",
+    "test:visual": "jest --config jest.config.js --runInBand",
+    "test:responsive": "playwright test tests/playwright/responsive.spec.js",
+    "test:cross-browser": "playwright test tests/playwright/cross-browser.spec.js",
+    "test:performance": "bash ./tests/lighthouse/run-lighthouse.sh",
+    "generate-icons": "electron-icon-builder --input=public/icon-master-2048.png --output=public/ --flatten"
+  },
+  "keywords": [],
+  "homepage": "https://gremlinlabs.com",
+  "author": {
+    "name": "gremlinlabs",
+    "email": "ej@gremlinlabs.com"
+  },
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@electron/remote": "^2.1.2",
+    "@tailwindcss/vite": "^4.1.10",
+    "electron-store": "^10.1.0",
+    "idb": "^8.0.3",
+    "phosphor-react": "^1.4.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@lhci/cli": "^0.15.0",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/react": "^9.0.12",
+    "@storybook/testing-react": "^2.0.1",
+    "@testing-library/react": "^16.3.0",
+    "@vitejs/plugin-react": "^4.5.2",
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.2.0",
+    "electron": "^36.5.0",
+    "electron-builder": "^26.0.12",
+    "electron-icon-builder": "^2.0.1",
+    "jest": "^30.0.2",
+    "lighthouse": "^12.6.1",
+    "playwright": "^1.53.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.10",
+    "vite": "^6.3.5",
+    "wait-on": "^8.0.3"
+  },
+  "build": {
+    "appId": "com.identitycrisis.pro",
+    "productName": "IdentityCrisis Pro",
+    "files": [
+      "dist/",
+      "src/",
+      "public/",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "public/icons/icon.icns",
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ],
+      "icon": "public/icons/icon.ico"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "tar.gz"
+      ],
+      "icon": "public/icons/1024x1024.png",
+      "category": "Utility"
+    }
+  }
+}
