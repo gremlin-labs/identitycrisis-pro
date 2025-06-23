@@ -1,3 +1,5 @@
+![IdentityCrisis Pro](public/gremlinlabs-identitycrisis-pro.jpg)
+
 # IdentityCrisis Pro 🕵️
 
 **Artificial Identities powered by Artificial Intelligence.**
