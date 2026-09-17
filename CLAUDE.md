@@ -1,3 +1,18 @@
+<!-- BEGIN GREMLIN NO GITHUB ACTIONS -->
+## GitHub Actions are prohibited
+
+Never enable, trigger, dispatch, rerun, or use GitHub Actions in this repository.
+Do not add or enable executable workflows under `.github/workflows/`, including
+CI, builds, tests, deployments, scheduled jobs, or workflow-based automation.
+This applies to hosted and self-hosted runners, even when a run appears free.
+Run checks and builds locally or through the approved operator-managed tooling.
+Existing workflow files are inert retained configuration, not permission to run.
+Do not re-enable Actions to satisfy a missing required check; report the mismatch
+and provide local verification evidence. Keep organization Actions disabled and
+disable Actions before the first push to any new repository outside that policy.
+This rule overrides older instructions that ask for GitHub Actions or hosted CI.
+<!-- END GREMLIN NO GITHUB ACTIONS -->
+
 <!-- BEGIN GREMLIN CENTRAL TASK HISTORY -->
 ## Central agent task history
 
