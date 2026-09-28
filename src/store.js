@@ -1,10 +1,35 @@
 // src/store.js
 const Store = require('electron-store');
+const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
+const { app } = require('electron');
+
+// Get (or generate on first run) a per-installation encryption key so no
+// secret is hardcoded in source. The key is stored outside the source tree
+// with restricted file permissions.
+function getOrCreateEncryptionKey() {
+  const keyPath = path.join(app.getPath('userData'), '.namely-key');
+  try {
+    if (fs.existsSync(keyPath)) {
+      return fs.readFileSync(keyPath, 'utf8').trim();
+    }
+  } catch (error) {
+    console.error('Error reading encryption key:', error);
+  }
+  const key = crypto.randomBytes(32).toString('hex');
+  try {
+    fs.writeFileSync(keyPath, key, { mode: 0o600 });
+  } catch (error) {
+    console.error('Error writing encryption key:', error);
+  }
+  return key;
+}
 
 // Create a store with encryption for API keys
 const store = new Store({
   name: 'namely-config',
-  encryptionKey: 'namely-secure-key', // In a real app, use a more secure key
+  encryptionKey: getOrCreateEncryptionKey(),
 });
 
 // API keys schema
